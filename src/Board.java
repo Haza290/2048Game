@@ -12,16 +12,19 @@ public class Board
 		board = new Tile[size][size];
 	}
 	
-	public boolean canMakeMoveDown(){
-		
-		int startX = 0;
-		int startY = 0;
-		
-		int movementX = 0;
-		int movementY = -1;
-		
-		int leftToRight = 1;
-		int downToUp = 1;
+	public boolean canMakeMove(){
+		return(canMakeMove(0,0,0,-1,1,1) || 		// check move down
+				canMakeMove(0,size-1,0,1,1,-1) || 	// check move up
+				canMakeMove(size-1,0,1,0,-1,1) ||	// check move right
+				canMakeMove(0,0,-1,0,1,1));			// check move left
+	}
+	
+	private boolean canMakeMove(final int startX,
+								final int startY,
+								final int movementX,
+								final int movementY,
+								final int leftToRight,
+								final int downToUp){
 		
 		for(int x = startX; 0 <= x && x < size; x += leftToRight){
 			for(int y = startY; 0 <= y && y < size; y += downToUp){
